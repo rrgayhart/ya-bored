@@ -22,6 +22,8 @@ group :production do
 end
 
 group :development, :test do
+  gem 'faker'
+  gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
