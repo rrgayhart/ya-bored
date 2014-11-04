@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :goal do
-    name "Big Goal"
+    key_name "Big Goal"
   end
 end
