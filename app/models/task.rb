@@ -10,6 +10,12 @@ class Task < ActiveRecord::Base
     task_ids.present? ? Task.find(task_ids.sample) : nil
   end
 
+  def self.select_a_set(search_params)
+    Task.
+      includes(:resources).where(:resources => {:id =>  search_params[:resource] }).
+      where("minutes <= ?", search_params[:minutes].to_i).order("RANDOM()").first
+  end
+
   private
 
   def self.computer_tasks

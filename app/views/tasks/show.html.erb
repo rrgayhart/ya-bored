@@ -1,0 +1,8 @@
+<h1><%= @task.name %></h1>
+<% if @task.site %>
+  <h2><%= link_to @task.site, @task.site %></h2>
+<% end %>
+<h3><%= @task.description %></h3>
+<h3><%= @task.minutes %> minute(s)</h3>
+
+<%= link_to 'Back', tasks_path %>

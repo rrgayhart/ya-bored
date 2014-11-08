@@ -1,7 +1,19 @@
 <div class="row">
   <div class="col-md-12">
-    <button type="button" id="fart-around" class="btn btn-lg">Fart Around</button>
-  </div>
+    <div class="fart-around">
+      <button type="button" id="fart-around" class="btn btn-lg">Fart Around</button>
 
-  <span id="showme"></span>
+      <span id="showme"></span>
+      <div id="selectme">
+        <%= form_tag :controller => 'tasks', :action => 'search', :method => 'get' do %>
+          I have <%= number_field_tag 'minutes', 15, in: 1...100 %> minutes &
+        access to: <%= select_tag 'resource', options_from_collection_for_select(@resources, "id", "name")%>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+      </div>
+    </div>
+    <div class="select-a-set">
+      <button type="button" id="select-button" class="btn btn-lg">Select-a-Set</button>
+    </div>
+  </div>
 </div>
