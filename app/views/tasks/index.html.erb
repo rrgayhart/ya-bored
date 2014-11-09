@@ -6,9 +6,10 @@
       <span id="showme"></span>
       <div id="selectme">
         <%= form_tag :controller => 'tasks', :action => 'search', :method => 'get' do %>
-          I have <%= number_field_tag 'minutes', 15, in: 1...100 %> minutes &
-        access to: <%= select_tag 'resource', options_from_collection_for_select(@resources, "id", "name")%>
-      <%= submit_tag "Search", :name => nil %>
+          I have <%= select_tag(:minutes, options_for_select(@minute_breakdown, selected: :option )) %>
+          of free time &
+          access to: <%= select_tag 'resource', options_from_collection_for_select(@resources, "id", "name")%>
+        <%= submit_tag "Search", :name => nil %>
       <% end %>
       </div>
     </div>

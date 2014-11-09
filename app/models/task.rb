@@ -5,6 +5,8 @@ class Task < ActiveRecord::Base
   has_many :task_goals
   has_many :goals, through: :task_goals
 
+  MINUTE_BREAKDOWN = [['a Short Break', 5], ['a Pomodoro', 25], ['an Hour-ish', 60], ['All Damn Day', 300]]
+
   def self.fart_around
     task_ids = computer_tasks & easy_tasks
     task_ids.present? ? Task.find(task_ids.sample) : nil

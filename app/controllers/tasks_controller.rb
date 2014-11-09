@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
     @resources = Resource.all
+    @minute_breakdown = Task::MINUTE_BREAKDOWN
   end
 
   def new
