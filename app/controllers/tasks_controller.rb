@@ -8,8 +8,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    if params[:super_secret_code] == env[SUPER_SECRET_CODE]
-
+    @task = Task.new(task_params)
+    @task.goal_ids = params[:task][:goal_ids]
+    @task.resource_ids = params[:task][:resource_ids]
+    if @task.save
+      redirect_to @task
+    else
+      render :new
     end
   end
 
@@ -33,6 +38,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:task).permit(:name, :description, :minutes, :site)
+  end
 
   def search_params
     params.permit(:minutes, :resource)

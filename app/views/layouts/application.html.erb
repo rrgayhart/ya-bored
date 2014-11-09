@@ -9,9 +9,13 @@
       <%= csrf_meta_tags %>
       <%= yield(:head) %>
     </head>
-  <body>
-    <main role="main">
-      <%= yield %>
-    </main>
-  </body>
-</html>
+    <body>
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+      <main role="main">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </main>
+    </body>
+  </html>

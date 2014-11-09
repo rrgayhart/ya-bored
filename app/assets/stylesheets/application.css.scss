@@ -4,10 +4,40 @@
 main {
   @extend .container;
   padding-bottom: 80px;
-  margin-top: 51px; // accommodate the navbar
+  margin-top: 81px; // accommodate the navbar
 }
 
 section {
   @extend .row;
   margin-top: 20px;
+}
+
+.navbar {
+  background: #d3d3d3;
+  min-height: 45px;
+}
+
+.navbar-default {
+  border-color: black;
+}
+
+.navbar-nav > li > a {
+  color: white;
+  &:focus,
+  &:hover {
+    background-color: darken(#d3d3d3, 5%);
+  }
+}
+
+.navbar-header a {
+  color: white;
+}
+
+a.navbar-brand {
+  padding-top: 4px;
+  padding-bottom: 10px;
+}
+
+.navbar-brand img {
+  height: 100%;
 }
