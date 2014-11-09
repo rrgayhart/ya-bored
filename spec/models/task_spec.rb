@@ -42,12 +42,12 @@ RSpec.describe Task, :type => :model do
       let!(:short_walk){create(:task, minutes: 15, resources: [other_resource])}
 
       it 'should pull a task under the alloted minutes' do
-        select_a_set_task = Task.select_a_set({ minutes: 15, resource: phone_resource.id})
+        select_a_set_task = Task.select_a_set({ minutes: 15}, [phone_resource.id.to_s])
         expect(select_a_set_task).to eq(short_phone_call)
       end
 
       it 'should pull a task including the selected resource' do
-        select_a_set_task = Task.select_a_set({ minutes: 60, resource: other_resource.id})
+        select_a_set_task = Task.select_a_set({ minutes: 60 }, [other_resource.id.to_s])
         expect(select_a_set_task).to eq(short_walk)
       end
     end

@@ -1,0 +1,11 @@
+<div id="selectme">
+  <%= form_tag :controller => 'tasks', :action => 'search', :method => 'get' do %>
+    I have <%= select_tag(:minutes, options_for_select(@minute_breakdown, selected: :option )) %>
+    of free time &
+    <br />
+    access to:
+    <%= collection_check_boxes :resource, :resource_ids, Resource.all, :id, :name %>
+    <br />
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>

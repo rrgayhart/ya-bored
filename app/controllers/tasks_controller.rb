@@ -25,7 +25,8 @@ class TasksController < ApplicationController
   end
 
   def search
-    @task = Task.select_a_set(search_params)
+    resource_ids = params[:resource][:resource_ids]
+    @task = Task.select_a_set(search_params, resource_ids)
     if @task
       redirect_to @task
     else
@@ -45,6 +46,6 @@ class TasksController < ApplicationController
   end
 
   def search_params
-    params.permit(:minutes, :resource)
+    params.permit(:minutes)
   end
 end

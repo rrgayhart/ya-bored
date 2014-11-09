@@ -12,13 +12,18 @@ class Task < ActiveRecord::Base
     task_ids.present? ? Task.find(task_ids.sample) : nil
   end
 
-  def self.select_a_set(search_params)
+  def self.select_a_set(search_params, resource_ids)
+    resource_ids = clean_up_id_array(resource_ids)
     Task.
-      includes(:resources).where(:resources => {:id =>  search_params[:resource] }).
+      includes(:resources).where(:resources => {:id =>  resource_ids }).
       where("minutes <= ?", search_params[:minutes].to_i).order("RANDOM()").first
   end
 
   private
+
+  def self.clean_up_id_array(id_array)
+    id_array.reject(&:empty?).map(&:to_i)
+  end
 
   def self.computer_tasks
     resource = Resource.find_or_create_by(name: 'computer')
