@@ -1,6 +1,13 @@
 #selectme {
   display: none;
   padding-top: 15px;
+  font-size: 150%;
+  .check_box_label {
+    margin: 5px;
+  }
+  .check_box {
+    margin-right: 5px;
+  }
 }
 
 #select-button {

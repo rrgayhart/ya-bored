@@ -4,7 +4,9 @@
     of free time &
     <br />
     access to:
-    <%= collection_check_boxes :resource, :resource_ids, Resource.all, :id, :name %>
+    <%= collection_check_boxes(:resource, :resource_ids, Resource.all, :id, :name) do |b| %>
+      <%= b.label("data-value" => b.value, class: "check_box_label") { b.check_box(class: "check_box") + b.text } %>
+    <% end %>
     <br />
     <%= submit_tag "Search", :name => nil %>
   <% end %>
