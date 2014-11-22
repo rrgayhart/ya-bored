@@ -15,22 +15,27 @@ RSpec.describe Task, :type => :model do
   context 'Methods' do
     let(:goal){create(:goal)}
     let(:resource){create(:computer_resource)}
-    let!(:computer_task){create(:computer_task, goals: [goal], resources: [resource])}
 
     describe 'fart_around' do
-      let(:regular_task){create(:task, goals: [goal], resources: [resource])}
 
       it 'should pull a computer task' do
-        5.times do
-          expect(Task.fart_around).to eq(computer_task)
-        end
+        create(:task, goals: [goal], resources: [resource])
+        computer_task = create(:computer_task, goals: [goal], resources: [resource])
+        expect(Task.fart_around).to eq(computer_task)
       end
 
-      it 'should pull a 15 minute or under task' do
-        create(:computer_task, goals: [goal], resources: [resource], minutes: 16)
-        5.times do
-          expect(Task.fart_around).to eq(computer_task)
-        end
+      it 'should only pull a 15 minute or under task' do
+        long_task = create(:computer_task, goals: [goal], resources: [resource], minutes: 16)
+        short_task = create(:computer_task, goals: [goal], resources: [resource], minutes: 15)
+        expect(Task.fart_around).to eq(short_task)
+      end
+
+      it 'should pull a task without resources' do
+        other_resource = create(:resource)
+        none_resource = create(:resource, name: 'none')
+        other_resource_task = create(:task, goals: [goal], resources: [other_resource], minutes: 15)
+        no_resource_task = create(:task, goals: [goal], resources: [none_resource], minutes: 15)
+        expect(Task.fart_around).to eq(no_resource_task)
       end
     end
 

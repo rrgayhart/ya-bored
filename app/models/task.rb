@@ -8,7 +8,7 @@ class Task < ActiveRecord::Base
   MINUTE_BREAKDOWN = [['a Short Break', 5], ['a Pomodoro', 25], ['an Hour-ish', 60], ['All Damn Day', 300]]
 
   def self.fart_around
-    task_ids = computer_tasks & easy_tasks
+    task_ids = basic_task_ids & easy_task_ids
     task_ids.present? ? Task.find(task_ids.sample) : nil
   end
 
@@ -21,16 +21,17 @@ class Task < ActiveRecord::Base
 
   private
 
+  def self.basic_task_ids
+    TaskResource.where("resource_id=? OR resource_id=?",
+                       Resource.none_resource.id,
+                       Resource.computer_resource.id).pluck(:task_id)
+  end
+
   def self.clean_up_id_array(id_array)
     id_array.reject(&:empty?).map(&:to_i)
   end
 
-  def self.computer_tasks
-    resource = Resource.find_or_create_by(name: 'computer')
-    TaskResource.where(resource_id: resource.id).pluck(:task_id)
-  end
-
-  def self.easy_tasks
+  def self.easy_task_ids
     Task.where("minutes < ?", 16).pluck(:id)
   end
 end

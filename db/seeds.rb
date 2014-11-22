@@ -28,6 +28,7 @@ phone_call = Resource.create({ name: 'phone(call)' })
 home = Resource.create({ name: 'home' })
 office = Resource.create({ name: 'office' })
 car = Resource.create({ name: 'car' })
+none = Resource.create({ name: 'none' })
 
 Task.create(
   { name: 'Inbox 0',
