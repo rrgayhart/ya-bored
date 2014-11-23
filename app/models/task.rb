@@ -5,6 +5,8 @@ class Task < ActiveRecord::Base
   has_many :task_goals
   has_many :goals, through: :task_goals
 
+  scope :active, -> { where(completed: false) }
+
   MINUTE_BREAKDOWN = [['a Short Break', 5], ['a Pomodoro', 25], ['an Hour-ish', 60], ['All Damn Day', 300]]
 
   def self.fart_around
@@ -14,7 +16,7 @@ class Task < ActiveRecord::Base
 
   def self.select_a_set(search_params, resource_ids)
     resource_ids = clean_up_id_array(resource_ids)
-    Task.
+    Task.active.
       includes(:resources).where(:resources => {:id =>  resource_ids }).
       where("minutes <= ?", search_params[:minutes].to_i).order("RANDOM()").first
   end
@@ -32,6 +34,6 @@ class Task < ActiveRecord::Base
   end
 
   def self.easy_task_ids
-    Task.where("minutes < ?", 16).pluck(:id)
+    Task.active.where("minutes < ?", 16).pluck(:id)
   end
 end

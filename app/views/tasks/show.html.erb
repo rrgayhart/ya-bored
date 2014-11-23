@@ -1,8 +1,15 @@
-<h1><%= @task.name %></h1>
-<% if @task.site %>
-  <h2><%= link_to @task.site, @task.site %></h2>
-<% end %>
-<h3><%= @task.description %></h3>
-<h3><%= @task.minutes %> minute(s)</h3>
-
-<%= link_to 'Back', tasks_path %>
+<div class=task_<%=@task.completed%>>
+  <% if @task.completed %>
+    <h1 class='completed'> COMPLETED TASK </h1>
+    <%= button_to("Re-Activate", task_path(@task, task: { completed: false }), method: :put, confirm: "Are you sure?", class: 'pull-right') %>
+  <% else %>
+    <%= button_to("Complete", task_path(@task, task: { completed: true }), method: :put, confirm: "Are you sure?", class: 'pull-right') %>
+  <% end %>
+  <h1><%= @task.name %></h1>
+  <% if @task.site %>
+    <h2><%= link_to @task.site, @task.site %></h2>
+  <% end %>
+  <h3><%= @task.description %></h3>
+  <h3><%= @task.minutes %> minute(s)</h3>
+  <%= link_to 'Back', tasks_path %>
+</div>

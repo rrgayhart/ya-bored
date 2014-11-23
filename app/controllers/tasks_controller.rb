@@ -8,6 +8,19 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def edit
+    @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
+      redirect_to @task
+    else
+      redirect_to @task
+    end
+  end
+
   def create
     @task = Task.new(task_params)
     @task.goal_ids = params[:task][:goal_ids]
@@ -42,7 +55,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :minutes, :site)
+    params.require(:task).permit(:name, :description, :minutes, :site, :completed)
   end
 
   def search_params
