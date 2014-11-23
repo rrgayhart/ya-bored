@@ -1,10 +1,5 @@
 <div class=task_<%=@task.completed%>>
-  <% if @task.completed %>
-    <h1 class='completed'> COMPLETED TASK </h1>
-    <%= button_to("Re-Activate", task_path(@task, task: { completed: false }), method: :put, confirm: "Are you sure?", class: 'pull-right') %>
-  <% else %>
-    <%= button_to("Complete", task_path(@task, task: { completed: true }), method: :put, confirm: "Are you sure?", class: 'pull-right') %>
-  <% end %>
+  <%= render partial: "completed_bar", locals: { task: @task } %>
   <h1><%= @task.name %></h1>
   <% if @task.site %>
     <h2><%= link_to @task.site, @task.site %></h2>

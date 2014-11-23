@@ -10,6 +10,7 @@ $(function () {
       var html = "<h1>" + task.name + "</h1>"
       + "<a href=\"" + task.site + "\">Visit Site</a>"
       + "<p>" + task.description + "</p>"
+      + "<a href=/tasks/" + task.id + ">Show</a>"
       show.html(html)
     });
   });
