@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+
+        <div class="panel-heading">
+          Recently Completed Tasks
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @tasks.each do |task| %>
+              <li class="list-group-item">
+                <%= task.name %>
+                <div class="pull-right action-buttons">
+                  <%= button_to("Re-Activate", task_path(task, task: { completed: false }), method: :put, confirm: "Are you sure?") %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Total Count <span class="label label-info"><%= @total_task_count %></span></h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

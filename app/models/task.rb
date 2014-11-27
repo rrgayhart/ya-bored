@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
   has_many :goals, through: :task_goals
 
   scope :active, -> { where(completed: false) }
+  scope :inactive, -> { where(completed: true) }
 
   MINUTE_BREAKDOWN = [['a Short Break', 5], ['a Pomodoro', 25], ['an Hour-ish', 60], ['All Damn Day', 300]]
 

@@ -4,10 +4,16 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
    root 'tasks#index'
-   get 'fart_around' => 'tasks#fart_around'
-   post 'search' => 'tasks#search'
+   #get 'fart_around' => 'tasks#fart_around'
+   #post 'search' => 'tasks#search'
 
-   resources :tasks
+   resources :tasks do
+     collection do
+       get :fart_around
+       post :search
+       get :completed_index
+     end
+   end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

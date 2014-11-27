@@ -2,7 +2,7 @@ $(function () {
   $('#fart-around').on('click', function (e) {
     return $.ajax({
       type: 'GET',
-      url: 'fart_around/',
+      url: 'tasks/fart_around/',
     }).success( function(task) {
       var show = $('#showme');
       $('#selectme').hide();
