@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
-  def index
+  def home
     @resources = Resource.all
     @minute_breakdown = Task::MINUTE_BREAKDOWN
+  end
+
+  def index
+    @tasks = Task.order(:created_at).paginate(:page => params[:page])
   end
 
   def new

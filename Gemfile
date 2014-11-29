@@ -10,6 +10,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'will_paginate'
 
 group :development do
   gem 'spring'
