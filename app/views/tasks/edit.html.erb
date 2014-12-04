@@ -1,0 +1,10 @@
+<div class=task_<%=@task.completed%>>
+  <%= render partial: "completed_bar", locals: { task: @task } %>
+  <%= simple_form_for @task, html: {class: 'form-horizontal' }  do |f| %>
+    <%= f.input :name %>
+    <%= f.input :site %>
+    <%= f.input :description %>
+    <%= f.input :minutes %>
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -6,5 +6,5 @@
   <% end %>
   <h3><%= @task.description %></h3>
   <h3><%= @task.minutes %> minute(s)</h3>
-  <%= link_to 'Back', tasks_path %>
+  <%= link_to 'Back', root_path %> | <%= link_to 'Edit', edit_task_path(@task) %>
 </div>
